@@ -9,7 +9,7 @@ export default function SiteLayout({
   return (
     <>
       <Navigation />
-      {children}
+      <main className="min-h-screen">{children}</main>
       <Footer />
     </>
   );
