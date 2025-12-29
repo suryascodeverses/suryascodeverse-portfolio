@@ -602,3 +602,4 @@ This is a personal portfolio project. All rights reserved.
 **Last Updated:** December 2024  
 **Version:** 1.0.0  
 **Status:** Frontend Complete ✅ | Backend Pending ⏳
+**Note:** current version of any content is dummy.
