@@ -48,7 +48,7 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-950 via-purple-950/20 to-gray-950">
+    <section className="min-h-screen py-20 px-4 section">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

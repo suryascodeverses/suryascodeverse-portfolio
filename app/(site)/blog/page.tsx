@@ -30,7 +30,7 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <section className="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-950 via-purple-950/20 to-gray-950">
+      <section className="min-h-screen py-20 px-4 section">
         <div className="max-w-6xl mx-auto text-center">
           <div className="animate-pulse space-y-8">
             <div className="h-12 bg-white/10 rounded w-1/3 mx-auto"></div>
@@ -42,7 +42,7 @@ export default function BlogPage() {
   }
 
   return (
-    <section className="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-950 via-purple-950/20 to-gray-950">
+    <section className="min-h-screen py-20 px-4 section">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
