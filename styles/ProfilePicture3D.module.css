@@ -1,0 +1,240 @@
+/* Main Container */
+.container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* Outer Glow Ring */
+.outerRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.15) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    transparent 70%
+  );
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Middle Ring */
+.middleRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(168, 85, 247, 0.2);
+  animation: rotate 20s linear infinite;
+}
+
+/* Main Picture Container */
+.pictureContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 350px;
+  height: 350px;
+  transform: translate(-50%, -50%) translateZ(50px);
+  border-radius: 50%;
+  overflow: visible;
+}
+
+/* Gradient Border */
+.gradientBorder {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(
+    135deg,
+    #a855f7,
+    #ec4899,
+    #3b82f6,
+    #a855f7
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Glass Background */
+.glassBackground {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px 0 rgba(168, 85, 247, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Image Wrapper */
+.imageWrapper {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Profile Image */
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.05) contrast(1.05);
+  transition: transform 0.3s ease;
+}
+
+.pictureContainer:hover .profileImage {
+  transform: scale(1.05);
+}
+
+/* Shine Effect */
+.shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+  transition: transform 0.1s ease-out;
+}
+
+/* Floating Particles */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+  animation: float 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.particle:nth-child(2) {
+  animation-delay: 1s;
+  animation-duration: 7s;
+}
+
+.particle:nth-child(3) {
+  animation-delay: 2s;
+  animation-duration: 8s;
+}
+
+.particle:nth-child(4) {
+  animation-delay: 3s;
+  animation-duration: 6.5s;
+}
+
+/* Status Badge */
+.statusBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(80px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0.4;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .pictureContainer {
+    width: 280px;
+    height: 280px;
+  }
+
+  .statusBadge {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+}

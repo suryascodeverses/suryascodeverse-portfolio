@@ -3,74 +3,133 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Scene3D from './Scene3D';
+import ProfilePicture3D from './ProfilePicture3D';
 import styles from '@/styles/Hero.module.css';
 
 export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    
-    tl.fromTo(
-      titleRef.current,
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 }
-    )
-    .fromTo(
-      subtitleRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8 },
-      '-=0.6'
-    )
-    .fromTo(
-      ctaRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6 },
-      '-=0.4'
-    );
+    const ctx = gsap.context(() => {
+      // Animate title
+      gsap.from(titleRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power4.out',
+      });
+
+      // Animate subtitle
+      gsap.from(subtitleRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: 'power4.out',
+      });
+
+      // Animate buttons
+      gsap.from(buttonsRef.current?.children || [], {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.6,
+        stagger: 0.2,
+        ease: 'power3.out',
+      });
+    });
+
+    return () => ctx.revert();
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="home" className={styles.hero}>
-      <div className={styles.scene3DContainer}>
+      {/* 3D Background */}
+      <div className={styles.background}>
         <Scene3D />
       </div>
-      
-      <div className={styles.content}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={styles.textContainer}>
+
+      {/* Hero Content */}
+      <div className={styles.container}>
+        <div className={styles.grid}>
+          
+          {/* Left Side - Text Content */}
+          <div className={styles.content}>
+            <div className={styles.badge}>
+              <span className={styles.badgeDot}></span>
+              <span>Available for freelance</span>
+            </div>
+
             <h1 ref={titleRef} className={styles.title}>
-              <span className="block text-xl md:text-2xl font-medium text-royal-300 mb-2">
-                Hello, I'm
-              </span>
-              <span className="block font-display text-5xl md:text-7xl lg:text-8xl font-bold gradient-text">
-                Your Name
-              </span>
-            </h1>
-            
-            <p ref={subtitleRef} className={styles.subtitle}>
-              Software Engineer crafting innovative digital experiences
+              Hi, I'm{' '}
+              <span className={styles.gradientText}>Your Name</span>
               <br />
-              <span className="text-royal-300">Full Stack Development • Creative Solutions • Modern Technologies</span>
+              Full Stack Developer
+            </h1>
+
+            <p ref={subtitleRef} className={styles.subtitle}>
+              I craft beautiful, functional, and scalable web applications
+              using modern technologies. Passionate about creating exceptional
+              user experiences and solving complex problems.
             </p>
-            
-            <div ref={ctaRef} className={styles.cta}>
-              <a href="#projects" className={styles.primaryBtn}>
+
+            <div ref={buttonsRef} className={styles.buttons}>
+              <button
+                onClick={() => scrollToSection('projects')}
+                className={styles.primaryButton}
+              >
                 View My Work
-              </a>
-              <a href="#contact" className={styles.secondaryBtn}>
-                Get In Touch
-              </a>
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className={styles.secondaryButton}
+              >
+                Get in Touch
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div className={styles.stats}>
+              <div className={styles.stat}>
+                <div className={styles.statNumber}>5+</div>
+                <div className={styles.statLabel}>Years Experience</div>
+              </div>
+              <div className={styles.stat}>
+                <div className={styles.statNumber}>50+</div>
+                <div className={styles.statLabel}>Projects Completed</div>
+              </div>
+              <div className={styles.stat}>
+                <div className={styles.statNumber}>30+</div>
+                <div className={styles.statLabel}>Happy Clients</div>
+              </div>
             </div>
           </div>
+
+          {/* Right Side - Profile Picture */}
+          <div className={styles.profileSection}>
+            <ProfilePicture3D 
+              imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80"
+              name="Your Name"
+            />
+          </div>
+
         </div>
-      </div>
-      
-      <div className={styles.scrollIndicator}>
-        <div className={styles.mouse}>
-          <div className={styles.wheel}></div>
+
+        {/* Scroll Indicator */}
+        <div className={styles.scrollIndicator}>
+          <div className={styles.mouse}>
+            <div className={styles.wheel}></div>
+          </div>
+          <span>Scroll to explore</span>
         </div>
       </div>
     </section>
