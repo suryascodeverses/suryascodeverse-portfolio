@@ -40,7 +40,7 @@ export default function BlogPostPage() {
 
   if (loading) {
     return (
-      <section className="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-950 via-purple-950/20 to-gray-950">
+      <section className="min-h-screen py-20 px-4 bg-gray-950">
         <div className="max-w-4xl mx-auto">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-white/10 rounded w-3/4"></div>
@@ -54,7 +54,7 @@ export default function BlogPostPage() {
 
   if (error || !post) {
     return (
-      <section className="min-h-screen py-20 px-4 bg-gradient-to-b from-gray-950 via-purple-950/20 to-gray-950">
+      <section className="min-h-screen py-20 px-4 bg-gray-950">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Post Not Found</h1>
           <p className="text-gray-400 mb-8">{error}</p>
