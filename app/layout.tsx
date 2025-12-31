@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { generateMetadata } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,13 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-
-export const metadata: Metadata = {
-  title: "Your Name - Software Engineer",
-  description: "Professional portfolio showcasing innovative software solutions and creative development",
-  keywords: ["software engineer", "portfolio", "web development", "full stack"],
-};
+export const metadata: Metadata = generateMetadata();
 
 export default function RootLayout({
   children,
@@ -26,7 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#a855f7" />
+      </head>
       <body>{children}</body>
     </html>
   );

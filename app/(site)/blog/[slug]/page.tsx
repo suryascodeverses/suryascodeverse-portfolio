@@ -6,6 +6,26 @@ import Link from "next/link";
 import { getBlogPostBySlug } from "@/lib/services";
 import { BlogPost } from "@/lib/types";
 
+import { Metadata } from 'next';
+import { generateMetadata as genMeta } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/blog/${params.slug}`);
+    const data = await response.json();
+    const post = data.data;
+
+    return genMeta({
+      title: post.title,
+      description: post.excerpt,
+      image: post.coverImage,
+      keywords: post.tags,
+    });
+  } catch {
+    return genMeta();
+  }
+}
+
 export default function BlogPostPage() {
   const params = useParams();
   const router = useRouter();

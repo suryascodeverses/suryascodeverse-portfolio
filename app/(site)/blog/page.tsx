@@ -5,6 +5,14 @@ import Link from "next/link";
 import { getBlogPosts } from "@/lib/services";
 import { BlogPost } from "@/lib/types";
 
+import { generateMetadata as genMeta } from '@/lib/seo';
+
+export const metadata = genMeta({
+  title: 'Blog',
+  description: 'Thoughts, tutorials, and insights on software development, web technologies, and programming best practices.',
+  keywords: ['Tech Blog', 'Programming Tutorials', 'Web Development', 'Software Engineering'],
+});
+
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
