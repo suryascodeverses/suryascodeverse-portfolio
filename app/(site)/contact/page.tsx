@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Metadata } from "next";
+import { useState } from 'react';
+import { submitContactForm } from '@/lib/services';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -20,36 +20,32 @@ export default function ContactPage() {
     setStatus("sending");
     setErrorMessage("");
 
-    // TODO: Replace with your actual contact form endpoint
-    // For now, this is a placeholder
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+      await submitContactForm(formData);
+      
       // Reset form
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setStatus("success");
-
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setStatus('success');
+      
       // Reset success message after 5 seconds
-      setTimeout(() => setStatus("idle"), 5000);
-    } catch (error) {
-      setStatus("error");
-      setErrorMessage("Failed to send message. Please try again.");
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error: any) {
+      setStatus('error');
+      setErrorMessage(error.message || 'Failed to send message. Please try again.');
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
 
   return (
-    <section className="min-h-screen py-20 px-4 section">
+    <section className="min-h-screen py-20 px-4 bg-gray-950">
       <div className="max-w-6xl mx-auto">
+        
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-4">
@@ -61,18 +57,14 @@ export default function ContactPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
+          
           {/* Contact Form */}
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              Send a Message
-            </h2>
-
+            <h2 className="text-3xl font-bold text-white mb-6">Send a Message</h2>
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   Your Name
                 </label>
                 <input
@@ -88,10 +80,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                   Email Address
                 </label>
                 <input
@@ -107,10 +96,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
                   Subject
                 </label>
                 <input
@@ -126,10 +112,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-300 mb-2"
-                >
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                   Message
                 </label>
                 <textarea
@@ -145,42 +128,46 @@ export default function ContactPage() {
               </div>
 
               {/* Status Messages */}
-              {status === "success" && (
+              {status === 'success' && (
                 <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-4 text-green-400">
-                  Message sent successfully! I'll get back to you soon.
+                  ✓ Message sent successfully! I'll get back to you soon.
                 </div>
               )}
 
-              {status === "error" && (
+              {status === 'error' && (
                 <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4 text-red-400">
-                  {errorMessage}
+                  ✕ {errorMessage}
                 </div>
               )}
 
               <button
                 type="submit"
-                disabled={status === "sending"}
+                disabled={status === 'sending'}
                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {status === "sending" ? "Sending..." : "Send Message"}
+                {status === 'sending' ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="animate-spin">⏳</span>
+                    Sending...
+                  </span>
+                ) : (
+                  'Send Message'
+                )}
               </button>
             </form>
           </div>
 
           {/* Contact Info & Social */}
           <div className="space-y-6">
+            
             {/* Contact Info */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h2 className="text-3xl font-bold text-white mb-6">
-                Contact Information
-              </h2>
-
+              <h2 className="text-3xl font-bold text-white mb-6">Contact Information</h2>
+              
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-purple-400 mb-2">
-                    Email
-                  </h3>
-                  <a
+                  <h3 className="text-lg font-semibold text-purple-400 mb-2">Email</h3>
+                  <a 
                     href="mailto:your.email@example.com"
                     className="text-gray-300 hover:text-white transition-colors"
                   >
@@ -189,31 +176,26 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-purple-400 mb-2">
-                    Location
-                  </h3>
+                  <h3 className="text-lg font-semibold text-purple-400 mb-2">Location</h3>
                   <p className="text-gray-300">
-                    San Francisco, CA
-                    <br />
+                    San Francisco, CA<br />
                     Available for remote work
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-purple-400 mb-2">
-                    Response Time
-                  </h3>
-                  <p className="text-gray-300">Usually within 24-48 hours</p>
+                  <h3 className="text-lg font-semibold text-purple-400 mb-2">Response Time</h3>
+                  <p className="text-gray-300">
+                    Usually within 24-48 hours
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Social Links */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h2 className="text-3xl font-bold text-white mb-6">
-                Connect With Me
-              </h2>
-
+              <h2 className="text-3xl font-bold text-white mb-6">Connect With Me</h2>
+              
               <div className="space-y-4">
                 <a
                   href="https://github.com/yourusername"
@@ -255,18 +237,14 @@ export default function ContactPage() {
 
             {/* Availability */}
             <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Current Availability
-              </h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Current Availability</h3>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-white font-semibold">
-                  Available for freelance
-                </span>
+                <span className="text-white font-semibold">Available for freelance</span>
               </div>
               <p className="text-gray-300">
-                I'm currently accepting new projects and collaborations. Let's
-                build something amazing together!
+                I'm currently accepting new projects and collaborations. 
+                Let's build something amazing together!
               </p>
             </div>
           </div>

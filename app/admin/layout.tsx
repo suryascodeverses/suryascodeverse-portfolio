@@ -55,11 +55,12 @@ export default function AdminLayout({
   }
 
   const navItems = [
-    { name: "Dashboard", path: "/admin", icon: "📊" },
-    { name: "Projects", path: "/admin/projects", icon: "💼" },
-    { name: "Skills", path: "/admin/skills", icon: "⚡" },
-    { name: "Blog", path: "/admin/blog", icon: "📝" },
-  ];
+    { name: 'Dashboard', path: '/admin', icon: '📊' },
+    { name: 'Projects', path: '/admin/projects', icon: '💼' },
+    { name: 'Skills', path: '/admin/skills', icon: '⚡' },
+    { name: 'Blog', path: '/admin/blog', icon: '📝' },
+    { name: 'Messages', path: '/admin/messages', icon: '📧' }, // ADD THIS LINE
+  ]
 
   return (
     <div className="min-h-screen bg-gray-950">

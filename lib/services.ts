@@ -340,3 +340,28 @@ export async function getCurrentUser(): Promise<any> {
   const response = await fetchAPI<ApiResponse<any>>(API_ENDPOINTS.ME);
   return response.data;
 }
+
+// ADD THIS TO THE END OF YOUR EXISTING lib/services.ts FILE
+
+// ============= Contact Form =============
+
+export interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export async function submitContactForm(data: ContactFormData): Promise<void> {
+  const response = await fetchAPI<ApiResponse<void>>(
+    `${API_ENDPOINTS.CONTACT}`,
+    {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }
+  );
+  
+  if (!response.success) {
+    throw new Error(response.error || 'Failed to send message');
+  }
+}

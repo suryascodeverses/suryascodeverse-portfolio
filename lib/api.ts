@@ -20,6 +20,9 @@ export const API_ENDPOINTS = {
   // Blog
   BLOG_POSTS: `${API_BASE_URL}/blog`,
   BLOG_POST_BY_SLUG: (slug: string) => `${API_BASE_URL}/blog/${slug}`,
+
+  //contact
+  CONTACT: `${API_BASE_URL}/contact`,
 };
 
 // Helper function for API calls
