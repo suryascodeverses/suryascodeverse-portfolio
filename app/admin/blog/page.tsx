@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 
 import { useEffect, useState } from "react";
 import {
@@ -7,7 +8,9 @@ import {
   updateBlogPost,
   deleteBlogPost,
 } from "@/lib/services";
-import { BlogPost } from "@/lib/types";
+import { BlogPost } from '@/lib/types';
+import RichTextEditor from '@/components/admin/RichTextEditor';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -270,7 +273,7 @@ export default function AdminBlogPage() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900 border border-white/10 rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-gray-900 border border-white/10 rounded-2xl p-8 max-w-5xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-white">
                 {editingPost ? "Edit Blog Post" : "Create New Post"}
@@ -284,85 +287,63 @@ export default function AdminBlogPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  value={formData.title}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      title: e.target.value,
-                      slug: formData.slug || generateSlug(e.target.value),
-                    });
-                  }}
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
-                  placeholder="My Awesome Blog Post"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
+                  <input
+                    type="text"
+                    value={formData.title}
+                    onChange={(e) => {
+                      setFormData({ 
+                        ...formData, 
+                        title: e.target.value,
+                        slug: formData.slug || generateSlug(e.target.value)
+                      });
+                    }}
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+                    placeholder="My Awesome Blog Post"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Slug</label>
+                  <input
+                    type="text"
+                    value={formData.slug}
+                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+                    placeholder="my-awesome-blog-post"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Slug (URL path)
-                </label>
-                <input
-                  type="text"
-                  value={formData.slug}
-                  onChange={(e) =>
-                    setFormData({ ...formData, slug: e.target.value })
-                  }
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
-                  placeholder="my-awesome-blog-post"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Excerpt
-                </label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Excerpt</label>
                 <textarea
                   value={formData.excerpt}
-                  onChange={(e) =>
-                    setFormData({ ...formData, excerpt: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                   required
                   rows={3}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 resize-none"
-                  placeholder="Brief description for preview..."
+                  placeholder="Brief description..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Content (HTML)
-                </label>
-                <textarea
+                <label className="block text-sm font-medium text-gray-300 mb-2">Cover Image</label>
+                <ImageUpload
+                  currentImage={formData.coverImage}
+                  onUploadComplete={(url) => setFormData({ ...formData, coverImage: url })}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Content</label>
+                <RichTextEditor
                   value={formData.content}
-                  onChange={(e) =>
-                    setFormData({ ...formData, content: e.target.value })
-                  }
-                  required
-                  rows={12}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 resize-none font-mono text-sm"
-                  placeholder="<h2>Section Title</h2><p>Content...</p>"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Cover Image URL
-                </label>
-                <input
-                  type="url"
-                  value={formData.coverImage}
-                  onChange={(e) =>
-                    setFormData({ ...formData, coverImage: e.target.value })
-                  }
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
-                  placeholder="https://example.com/image.jpg"
+                  onChange={(value) => setFormData({ ...formData, content: value })}
+                  placeholder="Write your blog post content..."
                 />
               </div>
 
@@ -373,9 +354,7 @@ export default function AdminBlogPage() {
                 <input
                   type="text"
                   value={formData.tags}
-                  onChange={(e) =>
-                    setFormData({ ...formData, tags: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
                   placeholder="React, JavaScript, Tutorial"
                 />
@@ -386,9 +365,7 @@ export default function AdminBlogPage() {
                   type="checkbox"
                   id="published"
                   checked={formData.published}
-                  onChange={(e) =>
-                    setFormData({ ...formData, published: e.target.checked })
-                  }
+                  onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
                   className="w-5 h-5 rounded border-white/10 bg-white/5 text-purple-600 focus:ring-purple-500"
                 />
                 <label htmlFor="published" className="text-sm text-gray-300">
@@ -409,7 +386,7 @@ export default function AdminBlogPage() {
                   disabled={submitting}
                   className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all disabled:opacity-50"
                 >
-                  {submitting ? "Saving..." : editingPost ? "Update" : "Create"}
+                  {submitting ? 'Saving...' : editingPost ? 'Update' : 'Create'}
                 </button>
               </div>
             </form>
