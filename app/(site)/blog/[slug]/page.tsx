@@ -6,12 +6,21 @@ import Link from "next/link";
 import { getBlogPostBySlug } from "@/lib/services";
 import { BlogPost } from "@/lib/types";
 
-import { Metadata } from 'next';
-import { generateMetadata as genMeta } from '@/lib/seo';
+import { Metadata } from "next";
+import { generateMetadata as genMeta } from "@/lib/seo";
+import { useAnalytics } from "../../../../lib/useAnalytics";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/blog/${params.slug}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/blog/${
+        params.slug
+      }`
+    );
     const data = await response.json();
     const post = data.data;
 
@@ -55,8 +64,14 @@ export default function BlogPostPage() {
       }
     }
 
-    if (slug) loadPost();
+    if (slug) {
+      loadPost();
+    }
   }, [slug, router]);
+
+  useEffect(() => {
+    if (post) useAnalytics("blog_view", post._id, post.title);
+  }, [post]);
 
   if (loading) {
     return (
