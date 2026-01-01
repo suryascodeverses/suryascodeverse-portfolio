@@ -9,6 +9,7 @@ import { BlogPost } from "@/lib/types";
 import { Metadata } from "next";
 import { generateMetadata as genMeta } from "@/lib/seo";
 import { useAnalytics } from "../../../../lib/useAnalytics";
+import Comments from "@/components/site/Comments";
 
 export async function generateMetadata({
   params,
@@ -172,6 +173,7 @@ export default function BlogPostPage() {
                      prose-ul:text-gray-300 prose-ol:text-gray-300"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+        <Comments blogPostId={post._id} />
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-white/10">

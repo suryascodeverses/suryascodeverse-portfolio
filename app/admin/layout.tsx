@@ -60,6 +60,7 @@ export default function AdminLayout({
     { name: "Skills", path: "/admin/skills", icon: "⚡" },
     { name: "Blog", path: "/admin/blog", icon: "📝" },
     { name: "Messages", path: "/admin/messages", icon: "📧" },
+    { name: "Comments", path: "/admin/comments", icon: "💬" },
     { name: "Analytics", path: "/admin/analytics", icon: "📈" },
   ];
 
