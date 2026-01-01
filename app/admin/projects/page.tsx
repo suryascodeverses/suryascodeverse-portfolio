@@ -14,15 +14,18 @@ export default function AdminProjectsPage() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    category: "Web App",
     image: "",
     technologies: "",
     githubUrl: "",
     liveUrl: "",
     featured: false,
   });
+
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -45,6 +48,7 @@ export default function AdminProjectsPage() {
       setEditingProject(project);
       setFormData({
         title: project.title,
+        category: project.category,
         description: project.description,
         image: project.image,
         technologies: project.technologies.join(", "),
@@ -57,6 +61,7 @@ export default function AdminProjectsPage() {
       setFormData({
         title: "",
         description: "",
+        category: "",
         image: "",
         technologies: "",
         githubUrl: "",
@@ -269,7 +274,26 @@ export default function AdminProjectsPage() {
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 resize-none"
                 />
               </div>
-
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Category
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+                >
+                  <option value="Web App">Web App</option>
+                  <option value="Mobile App">Mobile App</option>
+                  <option value="API">API</option>
+                  <option value="Desktop App">Desktop App</option>
+                  <option value="Game">Game</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Image URL

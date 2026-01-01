@@ -5,6 +5,7 @@ export interface Project {
   _id: string;
   title: string;
   description: string;
+  category: string; // ADD THIS LINE
   image: string;
   technologies: string[];
   githubUrl?: string;

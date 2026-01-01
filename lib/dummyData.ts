@@ -13,6 +13,7 @@ export const dummyProjects: Project[] = [
   {
     _id: "1",
     title: "E-Commerce Platform",
+    category: "Web App",
     description:
       "A full-stack e-commerce platform with real-time inventory management, payment processing, and admin dashboard. Built with microservices architecture for scalability.",
     image:
@@ -27,6 +28,7 @@ export const dummyProjects: Project[] = [
   {
     _id: "2",
     title: "AI-Powered Task Manager",
+    category: "Web App",
     description:
       "Smart task management app with AI-driven priority suggestions, natural language processing for task creation, and predictive analytics for deadline estimation.",
     image:
@@ -41,6 +43,7 @@ export const dummyProjects: Project[] = [
   {
     _id: "3",
     title: "Real-Time Collaboration Tool",
+    category: "Web App",
     description:
       "WebSocket-based collaboration platform for teams with live cursors, real-time document editing, video conferencing, and project management features.",
     image:
@@ -55,6 +58,7 @@ export const dummyProjects: Project[] = [
   {
     _id: "4",
     title: "Social Media Analytics Dashboard",
+    category: "Web App",
     description:
       "Comprehensive analytics dashboard for tracking social media metrics across multiple platforms with data visualization and automated reporting.",
     image:
@@ -68,6 +72,7 @@ export const dummyProjects: Project[] = [
   {
     _id: "5",
     title: "Fitness Tracking Mobile App",
+    category: "Web App",
     description:
       "Cross-platform mobile app for workout tracking, meal planning, and progress visualization with integration to wearable devices.",
     image:
@@ -82,6 +87,7 @@ export const dummyProjects: Project[] = [
   {
     _id: "6",
     title: "Video Streaming Platform",
+    category: "Web App",
     description:
       "Netflix-style video streaming service with content recommendation engine, user profiles, and adaptive bitrate streaming.",
     image:
