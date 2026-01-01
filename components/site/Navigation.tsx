@@ -1,8 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import styles from '@/styles/Navigation.module.css';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import styles from "@/styles/Navigation.module.css";
+import SearchBar from "./SearchBar";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,9 +14,9 @@ export default function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
@@ -27,35 +29,49 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ""}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className={styles.logo}>
-            <span className="font-display text-2xl font-bold gradient-text">YN</span>
+            <span className="font-display text-2xl font-bold gradient-text">
+              YN
+            </span>
           </Link>
-
+          <SearchBar />
           <div className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={styles.navLink}
-              >
+              <Link key={link.href} href={link.href} className={styles.navLink}>
                 {link.label}
               </Link>
             ))}
           </div>
+          <ThemeToggle />
 
           <button
             className="md:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
             </svg>
           </button>
