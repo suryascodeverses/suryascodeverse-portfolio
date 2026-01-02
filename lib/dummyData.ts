@@ -994,3 +994,64 @@ describe('Type tests', () => {
     updatedAt: "2024-12-12T10:00:00Z",
   },
 ];
+
+
+// ============================================
+// ANALYTICS DUMMY DATA
+// ============================================
+
+export const dummyAnalyticsData = {
+  totalViews: 12543,
+  recentViews: 3892,
+  blogViews: 7234,
+  projectViews: 5309,
+  
+  topBlogPosts: [
+    { _id: 'b1', title: 'Building Scalable Microservices with Node.js', count: 1243 },
+    { _id: 'b2', title: 'Mastering React Hooks: Advanced Patterns', count: 987 },
+    { _id: 'b3', title: 'Database Design Best Practices', count: 756 },
+    { _id: 'b4', title: 'Deploying Next.js Apps to AWS', count: 534 },
+    { _id: 'b5', title: 'TypeScript Advanced Types and Patterns', count: 421 },
+  ],
+  
+  topProjects: [
+    { _id: '1', title: 'E-Commerce Platform', count: 892 },
+    { _id: '2', title: 'AI-Powered Task Manager', count: 743 },
+    { _id: '3', title: 'Real-Time Collaboration Tool', count: 567 },
+    { _id: '4', title: 'Social Media Analytics Dashboard', count: 445 },
+    { _id: '5', title: 'Video Streaming Platform', count: 334 },
+  ],
+  
+  viewsByDay: [
+    { _id: '2025-01-26', count: 234 },
+    { _id: '2025-01-27', count: 289 },
+    { _id: '2025-01-28', count: 312 },
+    { _id: '2025-01-29', count: 267 },
+    { _id: '2025-01-30', count: 345 },
+    { _id: '2025-01-31', count: 298 },
+    { _id: '2025-02-01', count: 356 },
+    { _id: '2025-02-02', count: 401 },
+    { _id: '2025-02-03', count: 378 },
+    { _id: '2025-02-04', count: 423 },
+    { _id: '2025-02-05', count: 389 },
+    { _id: '2025-02-06', count: 445 },
+    { _id: '2025-02-07', count: 412 },
+    { _id: '2025-02-08', count: 467 },
+    { _id: '2025-02-09', count: 434 },
+    { _id: '2025-02-10', count: 489 },
+    { _id: '2025-02-11', count: 456 },
+    { _id: '2025-02-12', count: 501 },
+    { _id: '2025-02-13', count: 478 },
+    { _id: '2025-02-14', count: 523 },
+    { _id: '2025-02-15', count: 498 },
+    { _id: '2025-02-16', count: 534 },
+    { _id: '2025-02-17', count: 512 },
+    { _id: '2025-02-18', count: 567 },
+    { _id: '2025-02-19', count: 543 },
+    { _id: '2025-02-20', count: 589 },
+    { _id: '2025-02-21', count: 612 },
+    { _id: '2025-02-22', count: 634 },
+    { _id: '2025-02-23', count: 598 },
+    { _id: '2025-02-24', count: 623 },
+  ],
+};
