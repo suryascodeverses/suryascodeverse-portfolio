@@ -80,10 +80,21 @@
   position: relative;
   width: 100%;
   height: 250px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.2) 0%,
+    rgba(118, 75, 162, 0.2) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
 }
 
 .imagePlaceholder {
@@ -172,7 +183,7 @@
   .grid {
     grid-template-columns: 1fr;
   }
-  
+
   .title {
     font-size: 2rem;
   }
@@ -180,12 +191,15 @@
 
 .categoryFilters {
   display: flex;
+  justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-top: 1rem;
+  margin-bottom: 3rem;
 }
 
-.category, .categoryActive {
+.category,
+.categoryActive {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   border: none;

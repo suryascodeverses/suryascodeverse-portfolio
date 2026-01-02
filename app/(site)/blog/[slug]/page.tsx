@@ -8,7 +8,7 @@ import { BlogPost } from "@/lib/types";
 
 // import { Metadata } from "next";
 // import { generateMetadata as genMeta } from "@/lib/seo";
-import { useAnalytics } from "../../../../lib/useAnalytics";
+// import { useAnalytics } from "../../../../lib/useAnalytics";
 import Comments from "@/components/site/Comments";
 
 // export async function generateMetadata({
@@ -70,9 +70,9 @@ export default function BlogPostPage() {
     }
   }, [slug, router]);
 
-  useEffect(() => {
-    if (post) useAnalytics("blog_view", post._id, post.title);
-  }, [post]);
+  // useEffect(() => {
+  //   if (post) useAnalytics("blog_view", post._id, post.title);
+  // }, [post]);
 
   if (loading) {
     return (
